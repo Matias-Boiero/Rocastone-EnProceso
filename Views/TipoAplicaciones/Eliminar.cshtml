@@ -1,0 +1,33 @@
+﻿@model Rocastone.Models.TipoAplicacion
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<form method="post" asp-action="Eliminar">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="p-3">
+        <div class="form-group row">
+            <h2 class="text-danger">¿Desea eliminar este tipo?</h2>
+
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col-md-6 ">
+                        <label asp-for="Nombre" class="form-label fw-bold"></label>
+                        <input asp-for="Nombre" disabled class="form-control" />
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-danger me-1">Eliminar</button>
+                <a class="btn btn-outline-success" asp-controller="TipoAplicaciones" asp-action="Index">Regresar</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    @{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+    }
+

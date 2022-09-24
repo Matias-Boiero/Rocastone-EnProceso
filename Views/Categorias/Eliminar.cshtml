@@ -1,0 +1,43 @@
+﻿@model Rocastone.Models.Categoria
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<form method="post" asp-action="Eliminar">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="p-3">
+        <div class="form-group row">
+            <h2 class="text-danger">¿Desea eliminar Categoría?</h2>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <label asp-for="NombreCategoria" class="form-label fw-bold"></label>
+                        <input asp-for="NombreCategoria" disabled class="form-control" />
+                        <span asp-validation-for="NombreCategoria" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mt-3 mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="MostrarOrden" class="form-label fw-bold"></label>
+                        <input asp-for="MostrarOrden" disabled class="form-control" />
+                        <span asp-validation-for="MostrarOrden" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-danger me-1">Eliminar</button>
+                <a class="btn btn-outline-success" asp-controller="Categorias" asp-action="Index">Regresar</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    @{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+    }
+

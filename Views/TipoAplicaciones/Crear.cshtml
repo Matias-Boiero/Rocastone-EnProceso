@@ -1,0 +1,39 @@
+﻿@model Rocastone.Models.TipoAplicacion
+@{
+    ViewData["Title"] = "Crear";
+}
+
+
+<form method="post" asp-action="Crear">
+    <span asp-validation-summary="ModelOnly" class="text-danger"></span>
+
+    <div class="p-3">
+        <div class="form-group row">
+            <h2 class="text-primary">Crear nuevo tipo de aplicación</h2>
+
+            <div class="container">
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        <label asp-for="Nombre" class="form-label fw-bold"></label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="group col-md-6">
+                    <button type="submit" class="btn btn-outline-primary me-1">Crear</button>
+                    <a class="btn btn-outline-success" asp-controller="TipoAplicaciones" asp-action="Index">Regresar</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    @{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+    }
+
