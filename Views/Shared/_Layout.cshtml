@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Rocastone.Utilidades
+@inject IHttpContextAccessor HttpContextAccesor
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -32,10 +34,28 @@
                             <a class="nav-link " asp-area="" asp-controller="UserRoles" asp-action="Index">Administracion de Roles</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Categorias" asp-action="Index">Categoría</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="TipoAplicaciones" asp-action="Index">Aplicaciones</a>
+                        </li>
+                        <li>
+                            @if (HttpContextAccesor.HttpContext.Session.GetObject<List<CarroCompras>>(WebConstantes.SessionCarroCompras) != null)
+                            {
+                                <a asp-action="Index" asp-controller="Carro" class="nav-link">
+                                    @{
+                                        var count = HttpContextAccesor.HttpContext.Session.GetObject<List<CarroCompras>>(WebConstantes.SessionCarroCompras).Count();
+                                    }
+                                    <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#" class="nav-link">  <i class="fas fa-shopping-cart"></i> &nbsp; (0) </a>
+                            }
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -43,7 +63,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container mb-5">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

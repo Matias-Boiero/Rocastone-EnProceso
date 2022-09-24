@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Rocastone.Models.Producto>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+
+<div class="container">
+    <h1 class="text-warning">Productos</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="text-primary">Lista de Productos</h2>
+        </div>
+
+        <div class=col-md-6>
+            <div>
+                @*en este asp-action="Upsert" no le paso el Id por lo tanto se trata de una creacion de productos*@
+                <a asp-controller="Productos" asp-action="Upsert" class="btn btn-success mt-2 mb-4 "><i class="fa-solid fa-plus"></i> Crear nuevo Producto</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            @if (Model.Count() > 0)
+            {
+                <table class="table table-light table-striped table-bordered" id="MyTable">
+                    <thead>
+                        <tr>
+                            @* <th class="text-center"> @Html.DisplayNameFor(model => model.Id)</th>*@
+                            <th class="text-center text-secondary"> @Html.DisplayNameFor(model => model.Nombre)</th>
+                            <th class="text-center text-secondary"> @Html.DisplayNameFor(model => model.Precio)</th>
+                            <th class="text-center text-secondary"> @Html.DisplayNameFor(model => model.Categoria)</th>
+                            <th class="text-center text-secondary"> @Html.DisplayNameFor(model => model.TipoAplicacion)</th>
+                            <th class="text-center text-secondary">Editar/Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                @*<th class="text-center">  @Html.DisplayFor(modelItem => item.Id)</th>*@
+                                <th class="text-center">@Html.DisplayFor(modelItem => item.Nombre)</th>
+                                <th class="text-center"> @Html.DisplayFor(modelItem => item.Precio)</th>
+                                <th class="text-center">@Html.DisplayFor(modelItem => item.Categoria.NombreCategoria)</th>
+                                <th class="text-center"> @Html.DisplayFor(modelItem => item.TipoAplicacion.Nombre)</th>
+                                <th class="text-center">
+                                    <div role="group" class="btn-group">
+                                        @*en este asp-route-id=@item.Id  le paso el Id por lo tanto se trata de una modificacion de productos*@
+                                        <a asp-controller="Productos" asp-action="Upsert" asp-route-id=@item.Id class="btn btn-outline-primary mx-1"><i class="fa-solid fa-pen"></i> Actualizar</a>
+                                        <a asp-controller="Productos" asp-action="Eliminar" asp-route-id=@item.Id class="btn btn-outline-danger mx-1"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                                    </div>
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+    $('#MyTable').DataTable({
+    "language": {
+    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+    },
+    "aLengthMenu": [
+    [10,25, 50, 100, 200, -1],
+    [10,25, 50, 100, 200, "Todos"]
+    ]
+    });
+    });
+</script>
+}
+
+

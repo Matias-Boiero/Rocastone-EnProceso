@@ -1,8 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Rocastone.Models.ViewModels.HomeViewModel
+
+
+<div class=container>
+    <div class="text-center">
+        <button class="btn btn-dark filter-button" data-filter="all">Todos</button> @*el filter-button no es de booststrap lo puse para javascrpits*@
+        @foreach (var item in Model.Categorias)
+        {
+            <button class="btn btn-outline-secondary filter-button" data-filter="@item.NombreCategoria.Replace(" ","_")">
+                @item.NombreCategoria
+            </button>
+        }
+    </div>
+    <br />
+    <div class="row">
+        @foreach (var prod in Model.Productos)
+        {
+            <partial name="_ProductoCard" model="prod" />
+        }
+    </div>
+</div>
+
+@section Scripts {
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<script>
+        $(document).ready(function(){
+
+        $(".filter-button").click(function(){
+
+            var value = $(this).attr('data-filter');
+            if(value == "all")
+            {
+                $('.filter').show('1000');
+            }
+            else
+            {
+                $(".filter").not('.'+value).hide('3000');
+                $('.filter').filter('.'+value).show('3000');
+
+            }
+        });
+
+    });
+</script>
+}
+

@@ -21,6 +21,17 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 
 builder.Services.AddControllersWithViews();
+
+//Agrego servicios para la manejar las sesiones para manejar el agregado de productos al carro de compras
+builder.Services.AddHttpContextAccessor();
+
+
+builder.Services.AddSession(option =>
+{
+    option.IdleTimeout = TimeSpan.FromMinutes(10);
+    option.Cookie.HttpOnly = true;
+    option.Cookie.IsEssential = true;
+});
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
@@ -39,7 +50,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession(); //Agregarlo para usar las sessiones del carro
 app.UseRouting();
 
 app.UseAuthentication();
