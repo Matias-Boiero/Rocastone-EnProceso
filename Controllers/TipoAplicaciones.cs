@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Rocastone.Data;
 using Rocastone.Models;
 
 namespace Rocastone.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TipoAplicaciones : Controller
     {
         private readonly ApplicationDbContext _context;

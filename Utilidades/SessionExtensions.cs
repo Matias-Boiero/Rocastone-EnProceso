@@ -7,7 +7,7 @@ namespace Rocastone.Utilidades
         //voy a necesitar dos clases para configurar las sesiones
         //un metodo set para configurar la sesion 
         //un metodo get para obtenr la sesion
-        // Hago esto para que cuando un usuario presione el carro se abra la variante de sesion
+        // Hago esto para que cuando un usuario presione el carro se abra la variante de session
 
         public static void SetObject(this ISession session, string key, object value)
         {

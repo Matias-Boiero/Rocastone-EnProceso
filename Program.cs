@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Rocastone.Data;
 using Rocastone.Models;
+using Rocastone.Utilidades;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +20,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                                         .AddDefaultTokenProviders();
 
 
-
+//SendGreed
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddControllersWithViews();
 
@@ -50,11 +53,12 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseSession(); //Agregarlo para usar las sessiones del carro
+
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession(); //Agregarlo para usar las sessiones del carro
 
 //Seed Roles
 using (var scope = app.Services.CreateScope())
@@ -79,11 +83,11 @@ using (var scope = app.Services.CreateScope())
 }
 
 
-
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+
 
 app.Run();

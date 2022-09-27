@@ -27,21 +27,32 @@
                         <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
+                        @* <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="UserRoles" asp-action="Index">Administracion de Roles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Categorias" asp-action="Index">Categoría</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="TipoAplicaciones" asp-action="Index">Aplicaciones</a>
-                        </li>
+                            </li>*@
+                        @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Administrar Contenido
+                                </a>
+                                <ul class="dropdown-menu" caria-labelledby="navbarDropdown">
+                                    <li class="">
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="UserRoles" asp-action="Index">Administracion de Roles</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Categorias" asp-action="Index">Categoría</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="TipoAplicaciones" asp-action="Index">Aplicaciones</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
                         <li>
                             @if (HttpContextAccesor.HttpContext.Session.GetObject<List<CarroCompras>>(WebConstantes.SessionCarroCompras) != null)
                             {

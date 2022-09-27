@@ -5,12 +5,12 @@
     <div class="backgroundWhiteBorder">
         <div class="container">
             <div class="card">
-                <div class="card-header bg-dark text-light ml-0 row container">
+                <div class="card-header bg-dark text-light ml-0">
                     <div class="col-6">
                         <i class="fa fa-shopping-cart"></i> &nbsp;
                         Resumen de la Orden
                     </div>
-                    <div class="col-6 text-end">
+                    <div class="col-12 text-end">
                         <a asp-action="Index" class="btn btn-outline-info btn-sm">Regresar al Carro</a>
                     </div>
                 </div>
@@ -108,6 +108,9 @@
                                                 <div>
                                                     <h6 class="my-0">@item.Nombre</h6>
                                                     <small class="text-muted">Precio por m &sup2: @item.Precio</small>
+                                                </div>
+                                                <div class="col-6 col-md-2 text-center auto">
+                                                    <img src="@WebConstantes.ImagenRuta/@item.imgUrl" class="rounded" width="100%" />
                                                 </div>
                                             </li>
                                         }
